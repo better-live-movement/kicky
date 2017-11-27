@@ -68,3 +68,9 @@ company-statistics-cache.el
 anaconda-mode/
 
 # End of https://www.gitignore.io/api/emacs
+
+# My token
+token.js
+
+# dependencies
+node_modules/*
