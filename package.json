@@ -1,0 +1,24 @@
+{
+  "name": "d-bot",
+  "version": "0.1.0",
+  "description": "Just another discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjkatgithub/d-bot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "js"
+  ],
+  "author": "Melchior Kannengiesser",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mjkatgithub/d-bot/issues"
+  },
+  "homepage": "https://github.com/mjkatgithub/d-bot#readme"
+}
