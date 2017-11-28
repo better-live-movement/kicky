@@ -9,7 +9,7 @@ const GITHUB = 'https://github.com/mjkatgithub/d-bot'
 const BACKTICK ='`'
 
 //let's do it this way for now
-let help = 'These are the commands Foo knows\n**d!hello** greets you with your name\n**d!ping** try it\n**d!8ball** ask a question that can be answered with yes or no\n**d!help** shows this help\n**d!info** shows general infos about D-Bot';
+let help = 'These are the commands D-Bot knows\n**d!hello** greets you with your name\n**d!ping** try it\n**d!8ball** ask a question that can be answered with yes or no\n**d!help** shows this help\n**d!info** shows general infos about D-Bot';
 
 var fortunes = [
   'yes',
