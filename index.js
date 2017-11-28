@@ -26,6 +26,10 @@ bot.on('ready', () => {
   console.log('ready to rock...');
 });
 
+bot.on('guildMemberAdd', member => {
+  member.guild.channels.find('name', 'general').sendMessage('welcome ' + member.toString());
+});
+
 bot.on('message', message => {
   if(message.author.equals(bot.user)) return;
   if(!message.content.startsWith(PREFIX)) return;
