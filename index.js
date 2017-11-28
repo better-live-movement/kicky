@@ -10,11 +10,11 @@ var fortunes = [
 
 let bot = new Discord.Client();
 
-bot.on('ready', function(){
+bot.on('ready', () => {
   console.log('ready to rock...');
 });
 
-bot.on('message', function(message){
+bot.on('message', message => {
   if(message.author.equals(bot.user)) return;
   if(!message.content.startsWith(PREFIX)) return;
 
