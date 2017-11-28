@@ -2,7 +2,7 @@ const  Discord = require('discord.js');
 
 const TOKEN = require('./token.js');
 const PREFIX = 'd!';
-const VERSION = '1.0.0';
+const VERSION = '2.0.0';
 const GITHUB = 'https://github.com/mjkatgithub/d-bot'
 
 //I know its a dirty hack but it works
