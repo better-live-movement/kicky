@@ -1,11 +1,21 @@
 const  Discord = require('discord.js');
+
 const TOKEN = require('./token.js');
 const PREFIX = 'd!';
+const VERSION = '1.0.0';
+const GITHUB = 'https://github.com/mjkatgithub/d-bot'
+
+//I know its a dirty hack but it works
+const BACKTICK ='`'
+
+//let's do it this way for now
+let help = 'These are the commands Foo knows\n**d!hello** greets you with your name\n**d!ping** try it\n**d!8ball** ask a question that can be answered with yes or no\n**d!help** shows this help\n**d!info** shows general infos about D-Bot';
 
 var fortunes = [
-  'foo',
-  'bar',
-  'baz'
+  'yes',
+  'no',
+  'yo',
+  'nes',
 ];
 
 let bot = new Discord.Client();
