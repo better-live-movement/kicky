@@ -31,18 +31,33 @@ bot.on('message', message => {
   let args = message.content.substring(PREFIX.length).split(' ');
 
   switch(args[0].toLowerCase()) {
+    case 'hello':
+      message.channel.sendMessage('Hello ' + message.author.toString() + '!');
+      break;
     case 'ping':
       message.channel.sendMessage('pong!');
       break;
+    case 'help':
+      message.channel.sendMessage(help);
+      break;
     case 'info':
-      message.channel.sendMessage('This is the D-Bot!');
+      let infoCard = new Discord.RichEmbed()
+        .setTitle('D-Bot')
+        .setURL(GITHUB)
+        .setColor(0x1a81cd)
+        .setThumbnail(bot.user.avatarURL)
+        .addField('Version', VERSION)
+        .addField('Help', `Use ${BACKTICK}${PREFIX}help${BACKTICK} for a list of commands`)
+        .setFooter('For more info click on the title to visit the github repository.')
+      message.channel.sendMessage(infoCard);
       break;
     case '8ball':
       if(args[1]) message.channel.sendMessage(fortunes[Math.floor(Math.random() * fortunes.length)]);
       else message.channel.sendMessage('what?!');
       break;
     default:
-      message.channel.sendMessage('Invalid command!');
+      message.channel.sendMessage('***Invalid command!***');
+      message.channel.sendMessage(help);
       break;
   }
 
