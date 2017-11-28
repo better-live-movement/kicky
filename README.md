@@ -7,6 +7,7 @@ If you want your own D-Bot clone tis repo and replace `require('./token.js')` in
 ## features
 ### commands
 This is a list of basic commands D-Bot already knows.
+
 | commands | action |
 | --- | --- |
 | d!hello | greets you with your name |
@@ -14,5 +15,6 @@ This is a list of basic commands D-Bot already knows.
 | d!8ball | ask a question that can be answered with yes or no |
 | d!help | shows a this list of commands |
 | d!info | shows general infos about D-Bot |
+
 ## more
 read the [CHANGELOG](https://github.com/mjkatgithub/d-bot/blob/master/CHANGELOG.md) for latest updates
