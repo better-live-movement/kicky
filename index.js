@@ -2,7 +2,7 @@ const  Discord = require('discord.js');
 
 const TOKEN = require('./token.js');
 const PREFIX = 'd!';
-const VERSION = '2.0.0';
+const VERSION = '2.0.2';
 const SUPPORT = 'https://cnhv.co/1gdf0'
 const MINER = 'https://authedmine.com/media/miner.html?key=ROY9SbXSoyHawmn0RptMs0kapTJ0e7zV'
 
