@@ -13,7 +13,7 @@ This is a list of basic commands D-Bot already knows.
 | d!hello | greets you with your name |
 | d!ping | try it ;-) |
 | d!8ball | ask a question that can be answered with yes or no |
-| d!help | shows a this list of commands |
+| d!help | shows this list of commands |
 | d!info | shows general infos about D-Bot |
 
 ## more
