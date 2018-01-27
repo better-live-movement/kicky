@@ -50,7 +50,6 @@ bot.on('guildMemberAdd', member => {
     }
   }
 
-
 });
 
 bot.on('message', message => {
