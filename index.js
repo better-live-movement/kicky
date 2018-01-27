@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
-
 const TOKEN = require('./token.js');
+const CONFIG = require('./config.json');
 const PREFIX = 'd!';
 const VERSION = '2.0.2';
 const SUPPORT = 'https://cnhv.co/1gdf0'
@@ -31,22 +31,25 @@ bot.on('ready', () => {
 });
 
 bot.on('guildMemberAdd', member => {
-  member.guild.channels.find('name', 'general').send('welcome ' + member.toString());
+  member.guild.channels.find('name', 'general').send('Welcome ' + member.toString());
 
-  if(member.guild.roles.find("name", "noob")){
-    member.addRole(member.guild.roles.find("name", "noob"));
+  if(CONFIG.setNewbieRole) {
+    if(member.guild.roles.find("name", CONFIG.newbieRole)){
+      member.addRole(member.guild.roles.find("name", CONFIG.newbieRole));
+    }
+    else {
+      console.log("role not found! I'll create it!");
+      member.guild.createRole({
+        name: CONFIG.newbieRole,
+        color: generateHex(),
+        permissions: [],
+        hoist: true
+      }).then(function(role) {
+        member.addRole(role);
+      });
+    }
   }
-  else {
-    console.log("role not found! I'll create it!");
-    member.guild.createRole({
-      name: "noob",
-      color: generateHex(),
-      permissions: [],
-      hoist: true
-    }).then(function(role) {
-      member.addRole(role);
-    });
-  }
+
 
 });
 
