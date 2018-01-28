@@ -3,8 +3,9 @@ const TOKEN = require('./token.js');
 const CONFIG = require('./config.json');
 const PREFIX = 'd!';
 const VERSION = '2.0.2';
+const INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=384572972851265538&scope=bot&permissions=1'
 const SUPPORT = 'https://cnhv.co/1gdf0'
-const MINER = 'https://authedmine.com/media/miner.html?key=ROY9SbXSoyHawmn0RptMs0kapTJ0e7zV'
+const MINER = 'https://cnhv.co/1iih5'
 
 //I know its a dirty hack but it works
 const BACKTICK ='`'
@@ -76,8 +77,10 @@ bot.on('message', message => {
         .setThumbnail(bot.user.avatarURL)
         .addField('Version', VERSION)
         .addField('Help', `Use ${BACKTICK}${PREFIX}help${BACKTICK} for a list of commands`)
-        .addField('Server', 'For more info and support click on the title to visit the discord server.')
-        .setFooter(`Feel free to donate by running this miner: ${MINER}`)
+        .addField('Invite', `[Invite](${INVITE}) the bot to your server.`)
+        .addField('Server', `Click [here](${SUPPORT}) to visit the discord server.`)
+        .addField('donate', `Feel free to donate by running [this](${MINER}) miner.`)
+        .setFooter(`I had / have fun writing this bot. I hope you enjoy using it.`)
       message.channel.send(infoCard);
       break;
     case '8ball':
