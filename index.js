@@ -14,10 +14,10 @@ const BACKTICK ='`'
 let help = 'These are the commands D-Bot knows\n**d!hello** greets you with your name\n**d!ping** try it\n**d!8ball** ask a question that can be answered with yes or no\n**d!help** shows this help\n**d!info** shows general infos about D-Bot\n\nFor support visit https://cnhv.co/1gdf0';
 
 let fortunes = [
-  'yes',
-  'no',
-  'yo',
-  'nes',
+  'Yes!',
+  'No!',
+  'Maybe!',
+  'Yeah, well, whatever...',
 ];
 
 function generateHex(){
