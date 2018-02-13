@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
 const TOKEN = require('./token.js');
 const CONFIG = require('./config.json');
-const PREFIX = 'd!';
-const VERSION = '2.0.2';
+const PREFIX = 'k!';
+const VERSION = '2.0.3';
 const INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=384572972851265538&scope=bot&permissions=1'
 const SUPPORT = 'https://cnhv.co/1gdf0'
 const MINER = 'https://cnhv.co/1iih5'
@@ -86,6 +86,9 @@ bot.on('message', message => {
     case '8ball':
       if(args[1]) message.channel.send(fortunes[Math.floor(Math.random() * fortunes.length)]);
       else message.channel.send('what?!');
+      break;
+    case 'anno':
+      message.guild.channels.find('name', 'announcements').send(`@everyone Version ${VERSION} is alive!!!`);
       break;
     case 'setrole':
       if(args[1]){
