@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const TOKEN = require('./token.js');
 const CONFIG = require('./config.json');
 const PREFIX = 'd!';
-const VERSION = '2.0.2';
+const VERSION = '2.0.3';
 const INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=384572972851265538&scope=bot&permissions=1'
 const SUPPORT = 'https://cnhv.co/1gdf0'
 const MINER = 'https://cnhv.co/1iih5'
@@ -26,9 +26,15 @@ function generateHex(){
 
 let bot = new Discord.Client();
 
-bot.on('ready', () => {
-  bot.user.setGame(`${PREFIX}help`)
+bot.on('ready', async () => {
+  bot.user.setGame(`${PREFIX}info | ${PREFIX}help`)
   console.log('ready to rock...');
+  try {
+    let link = await bot.generateInvite(["ADMINISTRATOR"]);
+    console.log(link);
+  } catch(e) {
+    console.log(e.stack);
+  }
 });
 
 bot.on('guildMemberAdd', member => {
