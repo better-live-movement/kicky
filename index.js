@@ -1,4 +1,6 @@
 const Discord = require('discord.js');
+const YTDL = require('ytdl-core');
+
 const TOKEN = require('./token.js');
 const CONFIG = require('./config.json');
 const PREFIX = 'd!';
@@ -13,6 +15,16 @@ const BACKTICK ='`'
 //let's do it this way for now
 let help = 'These are the commands D-Bot knows\n**d!hello** greets you with your name\n**d!ping** try it\n**d!8ball** ask a question that can be answered with yes or no\n**d!help** shows this help\n**d!info** shows general infos about D-Bot\n\nFor support visit https://cnhv.co/1gdf0';
 
+function play(connection, message){
+  var server = servers[message.guild.id];
+  server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: 'audioonly'}));
+  server.queue.shift();
+  server.dispatcher.on("end", () => {
+    if (server.queue[0]) play(connection, message);
+    else connection.disconnect();
+  });
+}
+
 let fortunes = [
   'Yes!',
   'No!',
@@ -25,6 +37,8 @@ function generateHex(){
 }
 
 let bot = new Discord.Client();
+
+var servers = {};
 
 bot.on('ready', async () => {
   bot.user.setGame(`${PREFIX}info | ${PREFIX}help`)
@@ -123,6 +137,29 @@ bot.on('message', message => {
       break;
     case 'deleterole':
       message.guild.roles.find("name", "noob").delete();
+      break;
+    case 'play':
+      if (!args[1]) {
+        message.channel.send('please provide a link!');
+        return;
+      }
+      if (!message.member.voiceChannel) {
+        message.channel.send('You musst be in a voice channel!');
+        return;
+      }
+      if (!servers[message.guild.id]) servers[message.guild.id] = {queue: []};
+      var server = servers[message.guild.id];
+      server.queue.push(args[1]);
+      if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(connection => {
+        play(connection, message);
+      });
+      break;
+    case 'skip':
+      var server = servers[message.guild.id];
+      if (server.dispatcher) server.dispatcher.end();
+      break;
+    case 'stop':
+      if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
       break;
     default:
       message.channel.send('***Invalid command!***');
