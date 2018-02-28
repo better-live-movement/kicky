@@ -4,7 +4,7 @@ const YTDL = require('ytdl-core');
 const TOKEN = require('./token.js');
 const CONFIG = require('./config.json');
 const PREFIX = 'k!';
-const VERSION = '3.0.0';
+const VERSION = '3.0.1';
 const INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=384572972851265538&permissions=8&scope=bot';
 const SUPPORT = 'https://discord.gg/6VpxTbY';
 const MINER = 'https://authedmine.com/media/miner.html?key=ROY9SbXSoyHawmn0RptMs0kapTJ0e7zV';
