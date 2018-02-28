@@ -3,17 +3,18 @@ const YTDL = require('ytdl-core');
 
 const TOKEN = require('./token.js');
 const CONFIG = require('./config.json');
-const PREFIX = 'd!';
+const PREFIX = 'k!';
 const VERSION = '2.0.3';
-const INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=384572972851265538&scope=bot&permissions=1'
-const SUPPORT = 'https://cnhv.co/1gdf0'
-const MINER = 'https://cnhv.co/1iih5'
+const INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=384572972851265538&permissions=8&scope=bot';
+const SUPPORT = 'https://discord.gg/6VpxTbY';
+const MINER = 'https://authedmine.com/media/miner.html?key=ROY9SbXSoyHawmn0RptMs0kapTJ0e7zV';
+const DASHBOARD = 'https://kicky-home.herokuapp.com/';
 
 //I know its a dirty hack but it works
 const BACKTICK ='`'
 
 //let's do it this way for now
-let help = 'These are the commands D-Bot knows\n**d!hello** greets you with your name\n**d!ping** try it\n**d!8ball** ask a question that can be answered with yes or no\n**d!help** shows this help\n**d!info** shows general infos about D-Bot\n\nFor support visit https://cnhv.co/1gdf0';
+let help = 'These are the commands Kicky knows\n**k!hello** greets you with your name\n**k!ping** try it\n**k!8ball** ask a question that can be answered with yes or no\n**k!help** shows this help\n**k!info** shows general infos about D-Bot\n**k!play <youtubelink>**kicky plays the song (you have to be in a voice channel)\n\nFor support visit https://discord.gg/6VpxTbY';
 
 function play(connection, message){
   var server = servers[message.guild.id];
@@ -51,8 +52,24 @@ bot.on('ready', async () => {
   }
 });
 
+let greeter = false;
+
 bot.on('guildMemberAdd', member => {
-  member.guild.channels.find('name', 'general').send('Welcome ' + member.toString());
+  if (member.guild.channels.find('name', 'general') && greeter) {
+    try {
+      member.guild.channels.find('name', 'general').send('Welcome ' + member.toString());
+    } catch (e) {
+      console.log(e.stack);
+    }
+  } else {
+    if (member.guild.channels.find('name', 'welcome') && greeter) {
+      try {
+        member.guild.channels.find('name', 'welcome').send('Welcome ' + member.toString());
+      } catch (e) {
+        console.log(e.stack);
+      }
+    }
+  }
 
   if(CONFIG.setNewbieRole) {
     if(member.guild.roles.find("name", CONFIG.newbieRole)){
@@ -99,6 +116,7 @@ bot.on('message', message => {
         .addField('Help', `Use ${BACKTICK}${PREFIX}help${BACKTICK} for a list of commands`)
         .addField('Invite', `[Invite](${INVITE}) the bot to your server.`)
         .addField('Server', `Click [here](${SUPPORT}) to visit the discord server.`)
+        .addField('Website', `Click [here](${DASHBOARD}) to visit the Website.`)
         .addField('donate', `Feel free to donate by running [this](${MINER}) miner.`)
         .setFooter(`I had / have fun writing this bot. I hope you enjoy using it.`)
       message.channel.send(infoCard);
