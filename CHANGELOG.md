@@ -6,10 +6,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### added
-- general support for roles
+- general support for music (described in the features section)
+- general support for roles (but it's still deactivated)
 ### Changed
 - 8ball now answers with `Yes!`, `No!`, `Maybe!` and `Yeah, well, whatever...`
-
+- To make it easy for all users, we set the `help` and the `info` command as status.
 
 ## [2.0.3] - 2018-01-25
 ### Fixed
