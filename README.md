@@ -1,8 +1,8 @@
 # D-Bot
 ## Usage
-use [this](https://discordapp.com/api/oauth2/authorize?client_id=384572972851265538&scope=bot&permissions=1) link to
-[invite D-bot](https://discordapp.com/api/oauth2/authorize?client_id=384572972851265538&scope=bot&permissions=1) to your Discord-Server.
-If you want your own D-Bot clone tis repo and replace `require('./token.js')` in `index.js` with your own secret token in quotes.
+use [this](https://discordapp.com/api/oauth2/authorize?client_id=384572972851265538&permissions=8&scope=bot) link to
+[invite Kicky](https://discordapp.com/api/oauth2/authorize?client_id=384572972851265538&permissions=8&scope=bot) to your Discord-Server.
+If you want your own Kicky clone tis repo and replace `require('./token.js')` in `index.js` with your own secret token in quotes.
 
 ## features
 ### basic commands
@@ -23,4 +23,4 @@ to play music you musst be in a voice channel!
 type `<prefix>play <youtube-link>` to play a song.
 
 ## more
-read the [CHANGELOG](https://github.com/mjkatgithub/d-bot/blob/master/CHANGELOG.md) for latest updates
+read the [CHANGELOG](https://github.com/mjkatgithub/Kicky/blob/master/CHANGELOG.md) for latest updates

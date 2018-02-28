@@ -5,10 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [3.0.0] - 2018-02-28
 ### added
 - general support for music (described in the features section)
 - general support for roles (but it's still deactivated)
 ### Changed
+- we Changed the name to Kicky which means that now the default prefix is `k!`.
 - 8ball now answers with `Yes!`, `No!`, `Maybe!` and `Yeah, well, whatever...`
 - To make it easy for all users, we set the `help` and the `info` command as status.
 
