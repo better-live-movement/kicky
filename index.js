@@ -108,7 +108,7 @@ bot.on('message', message => {
       break;
     case 'info':
       let infoCard = new Discord.RichEmbed()
-        .setTitle('D-Bot')
+        .setTitle('Kicky')
         .setURL(SUPPORT)
         .setColor(0x1a81cd)
         .setThumbnail(bot.user.avatarURL)
