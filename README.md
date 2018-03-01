@@ -1,4 +1,4 @@
-# D-Bot
+# Kicky
 ## Usage
 use [this](https://discordapp.com/api/oauth2/authorize?client_id=384572972851265538&permissions=8&scope=bot) link to
 [invite Kicky](https://discordapp.com/api/oauth2/authorize?client_id=384572972851265538&permissions=8&scope=bot) to your Discord-Server.
@@ -16,11 +16,11 @@ The default prefix is `k!`
 | <prefix>ping | try it ;-) |
 | <prefix>8ball | ask a question that can be answered with yes or no |
 | <prefix>help | shows this list of commands |
-| <prefix>info | shows general infos about D-Bot |
+| <prefix>info | shows general infos about Kicky |
 
 ## music
 to play music you musst be in a voice channel!
 type `<prefix>play <youtube-link>` to play a song.
 
 ## more
-read the [CHANGELOG](https://github.com/mjkatgithub/Kicky/blob/master/CHANGELOG.md) for latest updates
+read the [CHANGELOG](https://github.com/better-live-movement/kicky/blob/master/CHANGELOG.md) for latest updates
