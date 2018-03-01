@@ -12,13 +12,13 @@ The default prefix is `k!`
 
 | commands | action |
 | --- | --- |
-| <prefix>hello | greets you with your name |
-| <prefix>ping | try it ;-) |
-| <prefix>8ball | ask a question that can be answered with yes or no |
-| <prefix>help | shows this list of commands |
-| <prefix>info | shows general infos about Kicky |
+| `<prefix>hello` | greets you with your name |
+| `<prefix>ping` | try it ;-) |
+| `<prefix>8ball` | ask a question that can be answered with yes or no |
+| `<prefix>help` | shows this list of commands |
+| `<prefix>info` | shows general infos about Kicky |
 
-## music
+### music
 to play music you musst be in a voice channel!
 type `<prefix>play <youtube-link>` to play a song.
 
