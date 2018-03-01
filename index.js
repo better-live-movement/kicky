@@ -4,7 +4,7 @@ const YTDL = require('ytdl-core');
 const TOKEN = require('./token.js');
 const CONFIG = require('./config.json');
 const PREFIX = 'k!';
-const VERSION = '3.0.1';
+const VERSION = '3.0.2';
 const INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=384572972851265538&permissions=8&scope=bot';
 const SUPPORT = 'https://discord.gg/6VpxTbY';
 const MINER = 'https://authedmine.com/media/miner.html?key=ROY9SbXSoyHawmn0RptMs0kapTJ0e7zV';
@@ -14,7 +14,7 @@ const DASHBOARD = 'https://kicky-home.herokuapp.com/';
 const BACKTICK ='`'
 
 //let's do it this way for now
-let help = 'These are the commands Kicky knows\n**k!hello** greets you with your name\n**k!ping** try it\n**k!8ball** ask a question that can be answered with yes or no\n**k!help** shows this help\n**k!info** shows general infos about D-Bot\n**k!play <youtubelink>**kicky plays the song (you have to be in a voice channel)\n\nFor support visit https://discord.gg/6VpxTbY';
+let help = 'These are the commands Kicky knows\n**k!hello** greets you with your name\n**k!ping** try it\n**k!8ball** ask a question that can be answered with yes or no\n**k!help** shows this help\n**k!info** shows general infos about Kicky\n**k!play <youtubelink>**kicky plays the song (you have to be in a voice channel)\n\nFor support visit https://discord.gg/6VpxTbY';
 
 function play(connection, message){
   var server = servers[message.guild.id];
