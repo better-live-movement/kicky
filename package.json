@@ -21,18 +21,18 @@
   },
   "homepage": "https://github.com/mjkatgithub/d-bot#readme",
   "dependencies": {
-    "bufferutil": "^3.0.3",
-    "discord.js": "^11.2.1",
+    "bufferutil": "^3.0.5",
+    "discord.js": "^11.4.2",
     "erlpack": "github:hammerandchisel/erlpack",
     "libsodium-wrappers": "^0.5.4",
-    "node-opus": "^0.2.7",
-    "nodemon": "^1.15.0",
+    "node-opus": "^0.2.9",
+    "nodemon": "^1.18.4",
     "opusscript": "0.0.3",
     "sodium": "^2.0.3",
     "uws": "^0.14.5",
-    "ytdl-core": "^0.20.1"
+    "ytdl-core": "^0.20.4"
   },
   "devDependencies": {
-    "mocha": "^5.0.0"
+    "mocha": "^5.2.0"
   }
 }
