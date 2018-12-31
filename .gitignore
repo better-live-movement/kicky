@@ -74,4 +74,4 @@ token.js
 
 # dependencies
 node_modules/*
-node_mudules.js/*
+node_modules.js/*
