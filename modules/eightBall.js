@@ -8,7 +8,7 @@ var method = EightBall.prototype;
     ];
   }
 
-  method.ask = function(member) {
+  method.ask = function(question) {
     return fortunes[Math.floor(Math.random() * fortunes.length)]
   }
 
