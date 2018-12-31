@@ -73,4 +73,5 @@ anaconda-mode/
 token.js
 
 # dependencies
-node_modules*/*
+node_modules/*
+node_mudules.js/*
