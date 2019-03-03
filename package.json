@@ -4,7 +4,7 @@
   "description": "Just another discord bot",
   "main": "index.js",
   "scripts": {
-    "start": "./node_modules/.bin/nodemon index",
+    "start": "nodemon index",
     "test": "mocha"
   },
   "repository": {
