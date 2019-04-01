@@ -2,11 +2,12 @@ const Discord = require('discord.js');
 const YTDL = require('ytdl-core');
 
 const Informer = require('./modules/Informer');
+const Fun = require('./modules/Fun');
+
 
 const TOKEN = require('./token.js');
 const CONFIG = require('./config.json');
 
-//const PREFIX = 'b!';
 const PREFIX = CONFIG.prefix;
 const VERSION = '3.0.4';
 
@@ -91,34 +92,29 @@ bot.on('message', message => {
   console.log("----------------------------------------------------------------------------------------------------------------------------");
   console.log(message);
 
-  //let args = message.content.substring(PREFIX.length).split(' ');
-
   msgArray = message.content.substring(PREFIX.length).split(' ');
   let module = msgArray[0].toLowerCase();
   let command;
   let args;
   if(msgArray[1]) {
-    command = msgArray[1].toLowerCase;
+    command = msgArray[1].toLowerCase();
   }
   if(msgArray[2]) {
     args =msgArray.slice(2);
   }
-  console.log(module);
   switch(module) {
     case 'hello':
-      message.channel.send('Hello ' + message.author.toString() + '!');
-      break;
     case 'ping':
-      message.channel.send('pong!');
+    case '8ball':
+      let funComander = new Fun(message);
+      command = msgArray[0].toLowerCase();
+      args =msgArray.slice(1);
+      funComander.command(command, args);
       break;
     case 'help':
     case 'info':
         let informer = new Informer(message, bot.user.avatarURL);
         informer.respond();
-      break;
-    case '8ball':
-      if(msgArray[1]) message.channel.send(fortunes[Math.floor(Math.random() * fortunes.length)]);
-      else message.channel.send('what?!');
       break;
     case 'anno':
       if (message.guild.channels.find('name', 'announcements')){
