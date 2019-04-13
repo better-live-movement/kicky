@@ -21,12 +21,6 @@ function play(connection, message){
   });
 }
 
-let fortunes = [
-  'Yes!',
-  'No!',
-  'Maybe!',
-  'Yeah, well, whatever...',
-];
 
 function generateHex(){
   return '#' + Math.floor(Math.random() * 16777215).toString(16);
