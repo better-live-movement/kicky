@@ -3,13 +3,12 @@ const YTDL = require('ytdl-core');
 
 const Informer = require('./modules/Informer');
 const Fun = require('./modules/Fun');
-
+const Anno = require('./modules/anno');
 
 const TOKEN = require('./token.js');
 const CONFIG = require('./config.json');
 
 const PREFIX = CONFIG.prefix;
-const VERSION = '3.0.4';
 
 function play(connection, message){
   var server = servers[message.guild.id];
@@ -31,8 +30,13 @@ let bot = new Discord.Client();
 var servers = {};
 
 bot.on('ready', async () => {
-  bot.user.setGame(`${PREFIX}info | ${PREFIX}help`)
-  console.log('ready to rock...');
+  bot.user.setPresence({
+    game: {
+      name: `${PREFIX}info | ${PREFIX}help`
+    },
+    status: 'idle'})
+  .then(console.log)
+  .catch(console.error);
   try {
     let link = await bot.generateInvite(["ADMINISTRATOR"]);
     console.log(link);
@@ -111,11 +115,16 @@ bot.on('message', message => {
         informer.respond();
       break;
     case 'anno':
+<<<<<<< HEAD
       if (message.guild.channels.find('name', 'announcements')){
         message.guild.channels.find('name', 'announcements').send(`@everyone Version ${VERSION} is alive!!!`);
       }else{
         message.channel.send('nope');
       }
+=======
+      let announcer = new Anno(message);
+      announcer.announce();
+>>>>>>> cleanup index
       break;
     case 'setrole':
       if(msgArray[1]){
