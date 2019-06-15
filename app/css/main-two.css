@@ -1,0 +1,51 @@
+@charset "UTF-8";
+.footer {
+  background-color: #0097a7;
+  ￼height: 34px;
+  line-height: 34px;
+  bottom: 0px;
+  width: 100%;
+  text-align: center; }
+  .footer * {
+    color: #303030; }
+  .footer a {
+    text-decoration: none; }
+.AppContainer {
+  margin: 0px;
+  background-color: #36393E;
+  color: #fff; }
+body {
+  margin: 0px;
+  background-color: #36393E;
+  color: #fff; }
+
+.home {
+  text-align: center; }
+  .home .landing {
+    padding: 5px; }
+  .home .features {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-image: url(/app/c7bb904b8e71ab7da6e77ec88d37977f.png);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed; }
+    .home .features table {
+      margin: 0 auto;
+      text-align: left;
+      border: solid black 1px; }
+
+@media (max-width: 767px) {
+  .landing {
+    margin-top: 80px;
+    margin-bottom: 80px; } }
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .landing {
+    margin-top: 80px;
+    margin-bottom: 80px; } }
+
+@media (min-width: 1024px) {
+  .landing {
+    margin-top: 80px;
+    margin-bottom: 80px; } }
