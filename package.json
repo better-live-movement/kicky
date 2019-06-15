@@ -1,9 +1,10 @@
 {
   "name": "Kicky",
-  "version": "3.0.2",
+  "version": "3.0.4",
   "description": "Just another discord bot",
   "main": "index.js",
   "scripts": {
+    "start": "./node_modules/.bin/nodemon index",
     "test": "mocha"
   },
   "repository": {
@@ -21,18 +22,12 @@
   },
   "homepage": "https://github.com/mjkatgithub/d-bot#readme",
   "dependencies": {
-    "bufferutil": "^3.0.5",
-    "discord.js": "^11.4.2",
-    "erlpack": "github:hammerandchisel/erlpack",
-    "libsodium-wrappers": "^0.5.4",
-    "node-opus": "^0.2.9",
-    "nodemon": "^1.18.4",
-    "opusscript": "0.0.3",
-    "sodium": "^2.0.3",
-    "uws": "^0.14.5",
-    "ytdl-core": "^0.20.4"
+    "discord.js": "^11.5.1",
+    "node-opus": "^0.3.2",
+    "ytdl-core": "^0.29.2"
   },
   "devDependencies": {
-    "mocha": "^5.2.0"
+    "mocha": "^6.1.4",
+    "nodemon": "^1.19.1"
   }
 }
