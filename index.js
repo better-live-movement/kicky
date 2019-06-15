@@ -4,7 +4,7 @@ const YTDL = require('ytdl-core');
 const TOKEN = require('./token.js');
 const CONFIG = require('./config.json');
 const PREFIX = 'k!';
-const VERSION = '3.0.2';
+const VERSION = '3.0.4';
 const INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=384572972851265538&permissions=8&scope=bot';
 const SUPPORT = 'https://discord.gg/6VpxTbY';
 const MINER = 'https://authedmine.com/media/miner.html?key=ROY9SbXSoyHawmn0RptMs0kapTJ0e7zV';
@@ -126,7 +126,11 @@ bot.on('message', message => {
       else message.channel.send('what?!');
       break;
     case 'anno':
-      message.guild.channels.find('name', 'announcements').send(`@everyone Version ${VERSION} is alive!!!`);
+      if (message.guild.channels.find('name', 'announcements')){
+        message.guild.channels.find('name', 'announcements').send(`@everyone Version ${VERSION} is alive!!!`);
+      }else{
+        message.channel.send('nope');
+      }
       break;
     case 'setrole':
       if(args[1]){
