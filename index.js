@@ -126,7 +126,11 @@ bot.on('message', message => {
       else message.channel.send('what?!');
       break;
     case 'anno':
-      message.guild.channels.find('name', 'announcements').send(`@everyone Version ${VERSION} is alive!!!`);
+      if (message.guild.channels.find('name', 'announcements')){
+        message.guild.channels.find('name', 'announcements').send(`@everyone Version ${VERSION} is alive!!!`);
+      }else{
+        message.channel.send('nope');
+      }
       break;
     case 'setrole':
       if(args[1]){
