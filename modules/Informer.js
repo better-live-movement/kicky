@@ -5,8 +5,8 @@ const VERSION = '3.0.2';
 
 const INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=384572972851265538&permissions=8&scope=bot';
 const SUPPORT = 'https://discord.gg/6VpxTbY';
-const MINER ='https://authedmine.com/media/miner.html?key=ROY9SbXSoyHawmn0RptMs0kapTJ0e7zV';
-const DASHBOARD = 'https://kicky-home.herokuapp.com/';
+const DONATE ='https://brave.com/bet307';
+const DASHBOARD = 'https://better-live-movement.github.io/kicky/';
 //let's do it this way for now
 const AVATAR = 'https://cdn.discordapp.com/avatars/405516819672203274/57c31366b8622443bc0b776ffdaf779c.png?size=2048';
 
@@ -27,7 +27,7 @@ let infoCard = new Discord.RichEmbed()
   .addField('Invite', `[Invite](${INVITE}) the bot to your server.`)
   .addField('Server', `Click [here](${SUPPORT}) to visit the discord server.`)
   .addField('Website', `Click [here](${DASHBOARD}) to visit the Website.`)
-  .addField('donate', `Feel free to donate by running [this](${MINER}) miner.`)
+  .addField('donate', `To support us give the new Brave Browser a try using [this](${DONATE}) link.`)
   .setFooter(`I had / have fun writing this bot. I hope you enjoy using it.`)
 
 let generalHelp = new Discord.RichEmbed()
