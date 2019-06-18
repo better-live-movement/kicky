@@ -34,7 +34,7 @@ bot.on('ready', async () => {
     game: {
       name: `${PREFIX}info | ${PREFIX}help`
     },
-    status: 'online'})
+    status: 'dnd'})
   .then(console.log)
   .catch(console.error);
   try {
