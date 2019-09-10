@@ -5,6 +5,8 @@ const Informer = require('./modules/Informer');
 const Fun = require('./modules/Fun');
 const Anno = require('./modules/anno');
 
+const Roler = require('./modules/Roler');
+
 const TOKEN = require('./token.js');
 const CONFIG = require('./config.json');
 
@@ -100,6 +102,7 @@ bot.on('message', message => {
   if(msgArray[2]) {
     args =msgArray.slice(2);
   }
+  let informer = new Informer(message, bot.user.avatarURL);
   switch(module) {
     case 'hello':
     case 'ping':
@@ -111,7 +114,6 @@ bot.on('message', message => {
       break;
     case 'help':
     case 'info':
-        let informer = new Informer(message, bot.user.avatarURL);
         informer.respond();
       break;
     case 'anno':
@@ -125,37 +127,6 @@ bot.on('message', message => {
       let announcer = new Anno(message);
       announcer.announce();
 >>>>>>> cleanup index
-      break;
-    case 'setrole':
-      if(msgArray[1]){
-        console.log('setrole has arguments');
-      }
-      break;
-    case 'removerole':
-      if(msgArray[1] && msgArray[2]){
-        let member = message.guild.members.find("displayName", msgArray[1])
-        if(member){
-          let role = message.guild.roles.find("name", msgArray[2])
-          if(role){
-            member.removeRole(role);
-            message.channel.send('role ' + role + ' removed from member ' + member.displayName);
-          }
-          else{
-            message.channel.send('member not found');
-            console.log('member ', msgArray[1], ' not found');
-          }
-        }
-        else{
-          message.channel.send('member not found');
-          console.log('member ', msgArray[1], ' not found');
-        }
-      }
-      else{
-        message.channel.send('member or role is missing');
-      }
-      break;
-    case 'deleterole':
-      message.guild.roles.find("name", "noob").delete();
       break;
     case 'play':
       if (!msgArray[1]) {
@@ -180,9 +151,17 @@ bot.on('message', message => {
     case 'stop':
       if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
       break;
+    case 'add_role':
+    case 'delete_role':
+    case 'assign_role':
+    case 'revoke_role':
+      let rolingStuff = new Roler(message);
+      rolingStuff.manage(message);
+      break;
     default:
       message.channel.send('***Invalid command!***');
-      message.channel.send(help);
+      //let informer = new Informer(message, bot.user.avatarURL);
+      message.channel.send(informer.help());
       break;
   }
 
