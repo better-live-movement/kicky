@@ -55,6 +55,7 @@ bot.on('ready', async () => {
 let greeter = false;
 
 bot.on('guildMemberAdd', member => {
+  console.log(member.guild);
   if (member.guild.channels.find('name', 'general') && greeter) {
     try {
       member.guild.channels.find('name', 'general').send('Welcome ' + member.toString());
