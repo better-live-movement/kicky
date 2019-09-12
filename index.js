@@ -72,7 +72,7 @@ bot.on('guildMemberAdd', member => {
     }
   }
 
-  if(CONFIG.setNewbieRole) {
+  if(CONFIG.setNewbieRole || member.guild.id == "403675414272147457") {
     if(member.guild.roles.find("name", CONFIG.newbieRole)){
       member.addRole(member.guild.roles.find("name", CONFIG.newbieRole));
     }
@@ -94,6 +94,8 @@ bot.on('guildMemberAdd', member => {
 bot.on('message', message => {
   if(message.author.equals(bot.user)) return;
   if(!message.content.startsWith(PREFIX)) return;
+  console.log("----------------------------------------------------------------------------------------------------------------------------");
+  console.log(message);
 
   let args = message.content.substring(PREFIX.length).split(' ');
 
