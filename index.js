@@ -56,16 +56,17 @@ let greeter = false;
 
 bot.on('guildMemberAdd', member => {
   console.log(member.guild);
-  if (member.guild.channels.find('name', 'general') && greeter) {
+  if (member.guild.channels.find('name', 'welcome') && (greeter || member.guild.id == "403675414272147457")) {
     try {
-      member.guild.channels.find('name', 'general').send('Welcome ' + member.toString());
+      const ch = member.guild.channels.find('name', 'welcome');
+      ch.send('Hey ' + member.toString() +'! Welcome to my home! Please read the #rules before posting anything.');
     } catch (e) {
       console.log(e.stack);
     }
   } else {
-    if (member.guild.channels.find('name', 'welcome') && greeter) {
+    if (member.guild.channels.find('name', 'general') && (greeter || member.guild.id == "403675414272147457")) {
       try {
-        member.guild.channels.find('name', 'welcome').send('Welcome ' + member.toString());
+        member.guild.channels.find('name', 'general').send('Welcome ' + member.toString());
       } catch (e) {
         console.log(e.stack);
       }
