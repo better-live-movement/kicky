@@ -59,6 +59,7 @@ bot.on('guildMemberAdd', member => {
   if (member.guild.channels.find('name', 'welcome') && (greeter || member.guild.id == "403675414272147457")) {
     try {
       const ch = member.guild.channels.find('name', 'welcome');
+      console.log('found channel: ', ch);
       ch.send('Hey ' + member.toString() +'! Welcome to my home! Please read the #rules before posting anything.');
     } catch (e) {
       console.log(e.stack);
