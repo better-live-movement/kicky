@@ -79,7 +79,7 @@ method.help = function() {
 
 method.respond = function() {
   msgArray = this._message.content.substring(CONFIG.prefix.length).split(' ');
-  console.log(CONFIG);
+  //console.log(CONFIG);
   let cmd = msgArray[0].toLowerCase();
   let args;
   if(msgArray[1]) {

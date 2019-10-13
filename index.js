@@ -1,4 +1,8 @@
 const Discord = require('discord.js');
+const mongoose = require('mongoose');
+//const Guild = require('./models/guild');
+const GuildController = require('./controllers/guild');
+
 const YTDL = require('ytdl-core');
 
 const Informer = require('./modules/Informer');
@@ -11,6 +15,7 @@ const TOKEN = require('./token.js');
 const CONFIG = require('./config.json');
 
 const PREFIX = CONFIG.prefix;
+const DEFAULT_PREFIX = "k!";
 
 function play(connection, message){
   var server = servers[message.guild.id];
@@ -27,6 +32,10 @@ function generateHex(){
   return '#' + Math.floor(Math.random() * 16777215).toString(16);
 }
 
+function execCmd(message, config){
+  //soon tm
+}
+
 let bot = new Discord.Client();
 
 var servers = {};
@@ -34,7 +43,7 @@ var servers = {};
 bot.on('ready', async () => {
   bot.user.setPresence({
     game: {
-      name: `${PREFIX}info | ${PREFIX}help`
+      name: `${DEFAULT_PREFIX}info | ${DEFAULT_PREFIX}help`
     },
     status: 'dnd'})
   .then(console.log)
@@ -45,6 +54,36 @@ bot.on('ready', async () => {
   } catch(e) {
     console.log(e.stack);
   }
+});
+
+//conect to DB
+mongoose.connect(
+  'mongodb://' +
+  process.env.USER + ':' +
+  process.env.PASSWD +
+  '@kickybot-shard-00-00-sjo1k.mongodb.net:27017/' +
+  process.env.DB +
+  '?ssl=true&replicaSet=KickyBot-shard-0&authSource=admin',
+  {
+    useNewUrlParser: true,
+    dbName: process.env.DB,
+    useUnifiedTopology: true
+  }
+)
+.then(() => {
+  console.log('\nconnected to database ', process.env.DB, '\n')
+}).catch(error => {
+  console.log(error);
+});
+mongoose.Promise = global.Promise;
+
+bot.on('guildCreate', (guild) => {
+  console.log(bot.user.username + " was invited to and joined " + guild.name);
+  GuildController.add_guild(guild.id);
+});
+
+bot.on('guildDelete', (guild) => {
+  GuildController.remove_guild(guild.id);
 });
 
 let greeter = false;
@@ -88,9 +127,21 @@ bot.on('guildMemberAdd', member => {
 
 bot.on('message', message => {
   if(message.author.equals(bot.user)) return;
+
+  GuildController.get_config(message.channel.guild.id, (err, config) => {
+    if(err){
+      console.error(err);
+    } else if (!config) {
+      message.channel.send('No config found for this Guild. Try again.');
+      GuildController.add_guild(message.channel.guild.id);
+    } else {
+      execCmd(message, config);
+    }
+  });
+
   if(!message.content.startsWith(PREFIX)) return;
   console.log("----------------------------------------------------------------------------------------------------------------------------");
-  console.log(message);
+  console.log(message.content);
 
   msgArray = message.content.substring(PREFIX.length).split(' ');
   let module = msgArray[0].toLowerCase();
@@ -152,7 +203,6 @@ bot.on('message', message => {
       break;
     default:
       message.channel.send('***Invalid command!***');
-      //let informer = new Informer(message, bot.user.avatarURL);
       message.channel.send(informer.help());
       break;
   }
