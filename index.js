@@ -117,16 +117,8 @@ bot.on('message', message => {
         informer.respond();
       break;
     case 'anno':
-<<<<<<< HEAD
-      if (message.guild.channels.find('name', 'announcements')){
-        message.guild.channels.find('name', 'announcements').send(`@everyone Version ${VERSION} is alive!!!`);
-      }else{
-        message.channel.send('nope');
-      }
-=======
       let announcer = new Anno(message);
       announcer.announce();
->>>>>>> cleanup index
       break;
     case 'play':
       if (!msgArray[1]) {
