@@ -23,11 +23,12 @@
   "homepage": "https://github.com/mjkatgithub/d-bot#readme",
   "dependencies": {
     "discord.js": "^11.5.1",
+    "mongoose": "^5.7.4",
     "node-opus": "^0.3.2",
-    "ytdl-core": "^0.29.2"
+    "ytdl-core": "^0.29.7"
   },
   "devDependencies": {
-    "mocha": "^6.1.4",
-    "nodemon": "^1.19.1"
+    "mocha": "^6.2.1",
+    "nodemon": "^1.19.3"
   }
 }
