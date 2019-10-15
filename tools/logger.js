@@ -5,7 +5,7 @@ function Logger(name = 'kicky') {
 
 method.add = function(content, name = 'log', date = false, type = 'info') {
   //Log 2 console 4 now
-  if(type == error){
+  if(type === 'error'){
     console.error(content);
   } else {
     console.log(name, ' :', content);
