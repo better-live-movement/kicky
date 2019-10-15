@@ -24,12 +24,11 @@ exports.get_config = (id, callback) => {
 exports.add_guild = (id) => {
   const guild = new Guild({
     _id: id,
-    prefix: "k!"
+    prefix: process.env.PREFIX
   });
   guild.save()
   .then(doc =>{
     console.log('guild added to db: ', doc._id);
-    //TODO add docs for models
   })
   .catch(console.error);
 }
