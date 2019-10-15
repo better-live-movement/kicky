@@ -2,43 +2,24 @@ const Discord = require('discord.js');
 const mongoose = require('mongoose');
 //const Guild = require('./models/guild');
 const GuildController = require('./controllers/guild');
+const CommandController = require('./controllers/command');
+const Logger = require('./tools/logger');
+const Log = new Logger('index');
 
-const YTDL = require('ytdl-core');
-
-const Informer = require('./modules/Informer');
-const Fun = require('./modules/Fun');
-const Anno = require('./modules/anno');
-
-const Roler = require('./modules/Roler');
+//const Informer = require('./modules/Informer');
 
 const TOKEN = require('./token.js');
 const CONFIG = require('./config.json');
 
 const PREFIX = CONFIG.prefix;
-const DEFAULT_PREFIX = "k!";
-
-function play(connection, message){
-  var server = servers[message.guild.id];
-  server.dispatcher = connection.playStream(YTDL(server.queue[0], {filter: 'audioonly'}));
-  server.queue.shift();
-  server.dispatcher.on("end", () => {
-    if (server.queue[0]) play(connection, message);
-    else connection.disconnect();
-  });
-}
+const DEFAULT_PREFIX = process.env.PREFIX;
 
 
 function generateHex(){
   return '#' + Math.floor(Math.random() * 16777215).toString(16);
 }
 
-function execCmd(message, config){
-  //soon tm
-}
-
 let bot = new Discord.Client();
-
-var servers = {};
 
 bot.on('ready', async () => {
   bot.user.setPresence({
@@ -127,7 +108,6 @@ bot.on('guildMemberAdd', member => {
 
 bot.on('message', message => {
   if(message.author.equals(bot.user)) return;
-
   GuildController.get_config(message.channel.guild.id, (err, config) => {
     if(err){
       console.error(err);
@@ -135,78 +115,15 @@ bot.on('message', message => {
       message.channel.send('No config found for this Guild. Try again.');
       GuildController.add_guild(message.channel.guild.id);
     } else {
-      execCmd(message, config);
+      console.log('guild: ', message.channel.guild.id, ' config: ', config);
+      if(message.content.startsWith(config.prefix)){
+        Log.add(message.content, 'command', true, 'info');
+        CommandController.exec_comand(message, bot, config);
+      } else if (message.content.startsWith(DEFAULT_PREFIX)) {
+        message.channel.send(`The prefix here is  ${config.prefix}`);
+      }
     }
   });
-
-  if(!message.content.startsWith(PREFIX)) return;
-  console.log("----------------------------------------------------------------------------------------------------------------------------");
-  console.log(message.content);
-
-  msgArray = message.content.substring(PREFIX.length).split(' ');
-  let module = msgArray[0].toLowerCase();
-  let command;
-  let args;
-  if(msgArray[1]) {
-    command = msgArray[1].toLowerCase();
-  }
-  if(msgArray[2]) {
-    args =msgArray.slice(2);
-  }
-  let informer = new Informer(message, bot.user.avatarURL);
-  switch(module) {
-    case 'hello':
-    case 'ping':
-    case '8ball':
-      let funComander = new Fun(message);
-      command = msgArray[0].toLowerCase();
-      args =msgArray.slice(1);
-      funComander.command(command, args);
-      break;
-    case 'help':
-    case 'info':
-        informer.respond();
-      break;
-    case 'anno':
-      let announcer = new Anno(message);
-      announcer.announce();
-      break;
-    case 'play':
-      if (!msgArray[1]) {
-        message.channel.send('please provide a link!');
-        return;
-      }
-      if (!message.member.voiceChannel) {
-        message.channel.send('You musst be in a voice channel!');
-        return;
-      }
-      if (!servers[message.guild.id]) servers[message.guild.id] = {queue: []};
-      var server = servers[message.guild.id];
-      server.queue.push(msgArray[1]);
-      if (!message.guild.voiceConnection) message.member.voiceChannel.join().then(connection => {
-        play(connection, message);
-      });
-      break;
-    case 'skip':
-      var server = servers[message.guild.id];
-      if (server.dispatcher) server.dispatcher.end();
-      break;
-    case 'stop':
-      if (message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
-      break;
-    case 'add_role':
-    case 'delete_role':
-    case 'assign_role':
-    case 'revoke_role':
-      let rolingStuff = new Roler(message);
-      rolingStuff.manage(message);
-      break;
-    default:
-      message.channel.send('***Invalid command!***');
-      message.channel.send(informer.help());
-      break;
-  }
-
 });
 
 bot.login(TOKEN);

@@ -1,6 +1,9 @@
 const Discord = require('discord.js');
 
+//TODO get config from DB
 const CONFIG = require('../config.json');
+
+
 const VERSION = '3.0.2';
 
 const INVITE = 'https://discordapp.com/api/oauth2/authorize?client_id=384572972851265538&permissions=8&scope=bot';
@@ -62,11 +65,11 @@ let funHelp = new Discord.RichEmbed()
 
 var method = Informer.prototype;
 
-function Informer(message, avatar) {
+function Informer(message, avatar, config) {
     this._guildId = message.guild.id
     this._message = message;
     this._avatar = avatar;
-    this._config ={};
+    this._config = config;
 }
 
 method.info = function() {
@@ -78,7 +81,7 @@ method.help = function() {
 };
 
 method.respond = function() {
-  msgArray = this._message.content.substring(CONFIG.prefix.length).split(' ');
+  msgArray = this._message.content.substring(this._config.prefix.length).split(' ');
   //console.log(CONFIG);
   let cmd = msgArray[0].toLowerCase();
   let args;
