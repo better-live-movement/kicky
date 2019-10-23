@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Guild = require('../models/guild');
 const Discord = require('discord.js');
-
+const Greeter = require('../modules/greeters');
 
 exports.get_config = (id, callback) => {
   Guild.findById(id)
@@ -21,21 +21,29 @@ exports.get_config = (id, callback) => {
   });
 }
 
-exports.add_guild = (id) => {
+exports.add_guild = (guild_id) => {
   const guild = new Guild({
-    _id: id,
+    _id: guild_id,
     prefix: process.env.PREFIX
   });
   guild.save()
   .then(doc =>{
     console.log('guild added to db: ', doc._id);
+    const greeter = new Greeter(guild_id);
+    greeter.add_greeter(guild_id);
+    //init level
+    //init mod
+    //init music
+    //init sales
   })
   .catch(console.error);
 }
 
 
-exports.remove_guild = (id) => {
-  Guild.deleteOne({_id: id})
+exports.remove_guild = (guild_id) => {
+  const greeter = new Greeter(guild_id);
+  greeter.remove_greeter(guild_id);
+  Guild.deleteOne({_id: guild_id})
   .exec()
   .then(result => {
     console.log('removed Guild: ', result);

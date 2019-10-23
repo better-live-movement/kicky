@@ -7,6 +7,7 @@ const Logger = require('./tools/logger');
 const Log = new Logger('index');
 
 //const Informer = require('./modules/Informer');
+const Greeter = require('./modules/greeters');
 
 const TOKEN = require('./token.js');
 const CONFIG = require('./config.json');
@@ -70,22 +71,13 @@ bot.on('guildDelete', (guild) => {
 let greeter = false;
 
 bot.on('guildMemberAdd', member => {
-  if (member.guild.channels.find('name', 'welcome') && (greeter || member.guild.id == "403675414272147457")) {
-    try {
-      const ch = member.guild.channels.find('name', 'welcome');
-      ch.send('Hey ' + member.toString() +'! Welcome to my home! Please read the #rules before posting anything.');
-    } catch (e) {
-      console.log(e.stack);
-    }
-  } else {
-    if (member.guild.channels.find('name', 'general') && (greeter || member.guild.id == "403675414272147457")) {
-      try {
-        member.guild.channels.find('name', 'general').send('Welcome ' + member.toString());
-      } catch (e) {
-        console.log(e.stack);
-      }
-    }
-  }
+  const greeter = new Greeter();
+  greeter.get_config(member.guild.id, () => {
+    greeter.welcome(member);
+  });
+
+
+
 
   if(CONFIG.setNewbieRole || member.guild.id == "403675414272147457") {
     if(member.guild.roles.find("name", CONFIG.newbieRole)){
