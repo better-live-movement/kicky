@@ -19,6 +19,15 @@ const BACKTICK ='`'
 //old help
 //let help = 'These are the commands Kicky knows\n**k!hello** greets you with your name\n**k!ping** try it\n**k!8ball** ask a question that can be answered with yes or no\n**k!help** shows this help\n**k!info** shows general infos about Kicky\n**k!play <youtubelink>**kicky plays the song (you have to be in a voice channel)\n\nFor support visit https://discord.gg/6VpxTbY';
 
+const models = ['greeter', 'music'];
+
+// const exampleEmbed = new Discord.RichEmbed().setTitle('Some title');
+//
+// if (message.author.bot) {
+// 	exampleEmbed.setColor('#7289da');
+// }
+
+
 let infoCard = new Discord.RichEmbed()
   .setTitle('Kicky')
   .setURL(SUPPORT)
