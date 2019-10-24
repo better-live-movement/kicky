@@ -7,6 +7,10 @@ const method = GreeterController.prototype;
 
 function GreeterController() {
   this._config = {};
+  this._help = {
+    "set foo": "sets foo",
+    "set": "sets bar"
+  };
 }
 
 method.add_greeter = function (guild_id) {
@@ -58,23 +62,28 @@ method.welcome = function(member) {
   if (this._config.greetNewbies) {
     this.greet(member);
   }
+  if(this._config.greetPrivate){
+    //do it
+  }
   if (this._config.setNewbieRole) {
     method.assignRole(member);
   }
 }
 
 method.greet = function(member) {
-  //greetText:"Hey {user}, welcome to **{server}**!"
-  //greetPrivate:false
   console.log('this._config', this._config);
-  try {
-    member.guild.channels.find('name', this._config.greetChannel)
-    .send(this._config.greetText);
-    //.send('Welcome ' + member.toString());
-  } catch (e) {
-    console.log(e.stack);
-  }
+  const channel = member.guild.channels.get(this._config.greetChannel);
+  if (!channel) return;
+
+  let replacements = {"{user}":member,"{server}":member.guild};
+  let greetText = this._config.greetText.replace(/{\w+}/g, function(all) {
+    return replacements[all] || all;
+  });
+
+  channel.send(greetText);
 }
+
+//client.channels.get("id") or guild.channels.get("id")
 
 
 
