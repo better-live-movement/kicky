@@ -71,15 +71,26 @@ method.welcome = function(member) {
 }
 
 method.greet = function(member) {
-  console.log('this._config', this._config);
   const channel = member.guild.channels.get(this._config.greetChannel);
   if (!channel) return;
-
   let replacements = {"{user}":member,"{server}":member.guild};
   let greetText = this._config.greetText.replace(/{\w+}/g, function(all) {
     return replacements[all] || all;
   });
 
+  //link channels
+  let channelTemplateArray = greetText.match(/#\S+/g);
+  if(channelTemplateArray.length > 0){
+    let channelReplacements = {};
+    for (let i = 0; i < channelTemplateArray.length; i++) {
+      let placeholder = channelTemplateArray[i];
+      let foundChannel = member.guild.channels.find(ch => ch.name === placeholder.substring(1));
+      channelReplacements[placeholder] = `<#${foundChannel.id}>`;
+    }
+    greetText = greetText.replace(/#\S+/g, function(all) {
+      return channelReplacements[all] || all;
+    });
+  }
   channel.send(greetText);
 }
 
