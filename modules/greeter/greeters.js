@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Greeter = require('../../models/greeter');
+const Greeter = require('./greeter_model');
 const Logger = require('../../tools/logger');
 const Log = new Logger("Greeter");
 
