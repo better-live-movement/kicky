@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const Guild = require('../models/guild');
 const Discord = require('discord.js');
 const Greeter = require('../modules/greeter/greeters');
@@ -19,7 +18,7 @@ exports.get_config = (id, callback) => {
   .catch(err => {
     callback(err);
   });
-}
+};
 
 exports.add_guild = (guild_id) => {
   const guild = new Guild({
@@ -37,7 +36,7 @@ exports.add_guild = (guild_id) => {
     //init sales
   })
   .catch(console.error);
-}
+};
 
 
 exports.remove_guild = (guild_id) => {
@@ -49,20 +48,20 @@ exports.remove_guild = (guild_id) => {
     console.log('removed Guild: ', result);
   })
   .catch(console.error);
-}
+};
 
 exports.list_guilds = (message) => {
   this.message = message;
   Guild.find()
   .exec()
   .then(docs => {
-    docs.forEach((doc, idx, message) => {
-      let Guildembed = new Discord.RichEmbed()
+    docs.forEach((doc) => {
+      let GuildEmbed = new Discord.RichEmbed()
         .setTitle("config for joined guild")
         .addField("id",doc._id)
-        .addField("prefix",doc.prefix)
-      this.message.channel.send(Guildembed);
+        .addField("prefix",doc.prefix);
+      this.message.channel.send(GuildEmbed);
     });
   })
   .catch(console.error);
-}
+};
