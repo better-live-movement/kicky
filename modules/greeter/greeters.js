@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-const Greeter = require('../models/greeter');
-const Logger = require('../tools/logger');
+const Greeter = require('../../models/greeter');
+const Logger = require('../../tools/logger');
 const Log = new Logger("Greeter");
 
 const method = GreeterController.prototype;
@@ -49,7 +49,7 @@ method.get_config = function (guildId, cb) {
     }
   })
   .catch(err => {
-    Log.add(err, 'Greeter: Load config faild');
+    Log.add(err, 'Greeter');
   });
 }
 
@@ -94,34 +94,13 @@ method.greet = function(member) {
   channel.send(greetText);
 }
 
-//client.channels.get("id") or guild.channels.get("id")
-
-
-
-//  if (member.guild.channels.find('name', 'welcome') && (greeter || member.guild.id == "403675414272147457")) {
-//    try {
-//      const ch = member.guild.channels.find('name', 'welcome');
-//      ch.send('Hey ' + member.toString() +'! Welcome to my home! Please read the #rules before posting anything.');
-//    } catch (e) {
-//      console.log(e.stack);
-//    }
-//  } else {
-//    if (member.guild.channels.find('name', 'general') && (greeter || member.guild.id == "403675414272147457")) {
-//      try {
-//        member.guild.channels.find('name', 'general').send('Welcome ' + member.toString());
-//      } catch (e) {
-//        console.log(e.stack);
-//      }
-//    }
-//  }
-
-
-
-
-
-
-
 method.assignRole = function(member) {
+  const rolles = this._config.newbieRoles;
+  roles.forEach( newbieRole => {
+    member.addRole(member.guild.roles.get(newbieRole));
+  });
+  
+
   //newbieRoles:Array
   //member.addRole(member.guild.roles.find("name", this._config.newbieRole));
 }

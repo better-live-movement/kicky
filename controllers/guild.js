@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Guild = require('../models/guild');
 const Discord = require('discord.js');
-const Greeter = require('../modules/greeters');
+const Greeter = require('../modules/greeter/greeters');
 
 exports.get_config = (id, callback) => {
   Guild.findById(id)

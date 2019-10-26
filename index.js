@@ -7,7 +7,7 @@ const Logger = require('./tools/logger');
 const Log = new Logger('index');
 
 //const Informer = require('./modules/Informer');
-const Greeter = require('./modules/greeters');
+const Greeter = require('./modules/greeter/greeters');
 
 const TOKEN = require('./token.js');
 const CONFIG = require('./config.json');
