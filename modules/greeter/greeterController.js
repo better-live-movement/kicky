@@ -7,10 +7,10 @@ const method = GreeterController.prototype;
 
 function GreeterController() {
   this._config = {};
-  this._help = {
-    "set foo": "sets foo",
-    "set": "sets bar"
-  };
+  // this._help = {
+  //   "set foo": "sets foo",
+  //   "set": "sets bar"
+  // };
 }
 
 method.add_greeter = function (guild_id) {
@@ -20,12 +20,12 @@ method.add_greeter = function (guild_id) {
   });
   greeter.save()
   .then(doc => {
-    Log.add(`greeter saved for guild: ${guild_id}`);
+    Log.add(`greeter saved for guild: ${guild_id} \n${doc}`);
   })
   .catch(err =>{
     Log.add(err);
   });
-}
+};
 
 method.remove_greeter = function (guild_id) {
   Greeter.deleteOne({guild_id: guild_id})
@@ -34,7 +34,7 @@ method.remove_greeter = function (guild_id) {
     console.log('removed greeter', result);
   })
   .catch(console.error);
-}
+};
 
 method.get_config = function (guildId, cb) {
   Greeter.findOne({guild_id: guildId})
@@ -51,7 +51,7 @@ method.get_config = function (guildId, cb) {
   .catch(err => {
     Log.add(err, 'Greeter');
   });
-}
+};
 
 method.welcome = function(member) {
   console.log("this._config.moduleActive", this._config.moduleActive);
@@ -68,7 +68,7 @@ method.welcome = function(member) {
   if (this._config.setNewbieRole) {
     method.assignRole(member);
   }
-}
+};
 
 method.greet = function(member) {
   const channel = member.guild.channels.get(this._config.greetChannel);
@@ -92,18 +92,24 @@ method.greet = function(member) {
     });
   }
   channel.send(greetText);
-}
+};
 
 method.assignRole = function(member) {
-  const rolles = this._config.newbieRoles;
+  const roles = this._config.newbieRoles;
   roles.forEach( newbieRole => {
-    member.addRole(member.guild.roles.get(newbieRole));
+    member.addRole(member.guild.roles.get(newbieRole))
+        .then(response => {
+          console.log(response);
+        })
+        .catch(err => {
+          Log.add(err, 'add-role', false, 'error');
+        });
   });
   
 
   //newbieRoles:Array
   //member.addRole(member.guild.roles.find("name", this._config.newbieRole));
-}
+};
 
 method.goodbye = function(member) {
   if (this._config.moduleActive === false) {
@@ -115,15 +121,15 @@ method.goodbye = function(member) {
   if (this._config.setNewbieRole) {
     method.revokeRole(member);
   }
-}
+};
 
 method.sendLeaveMessage = function (member) {
   //do it
     //leaveMessage:"**{user.idname}** just left the server 🙁"
-}
+};
 
 method.revokeRole = function (member) {
   //do it
-}
+};
 
 module.exports = GreeterController;
