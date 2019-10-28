@@ -1,6 +1,6 @@
 const Guild = require('../models/guild');
 const Discord = require('discord.js');
-const Greeter = require('../modules/greeter/greeters');
+const Greeter = require('../modules/greeter/greeterController');
 
 exports.get_config = (id, callback) => {
   Guild.findById(id)

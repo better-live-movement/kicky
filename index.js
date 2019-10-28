@@ -7,12 +7,12 @@ const Logger = require('./tools/logger');
 const Log = new Logger('index');
 
 //const Informer = require('./modules/Informer');
-const Greeter = require('./modules/greeter/greeters');
+const Greeter = require('./modules/greeter/greeterController');
 
 const TOKEN = require('./token.js');
 const CONFIG = require('./config.json');
 
-const PREFIX = CONFIG.prefix;
+//const PREFIX = CONFIG.prefix;
 const DEFAULT_PREFIX = process.env.PREFIX;
 
 
@@ -38,7 +38,7 @@ bot.on('ready', async () => {
   }
 });
 
-//conect to DB
+//connect to DB
 mongoose.connect(
   'mongodb://' +
   process.env.USER + ':' +
@@ -68,7 +68,7 @@ bot.on('guildDelete', (guild) => {
   GuildController.remove_guild(guild.id);
 });
 
-let greeter = false;
+//let greeter = false;
 
 bot.on('guildMemberAdd', member => {
   const greeter = new Greeter();
@@ -77,11 +77,10 @@ bot.on('guildMemberAdd', member => {
   });
 
 
-
-
-  if(CONFIG.setNewbieRole || member.guild.id == "403675414272147457") {
+  if(CONFIG.setNewbieRole || member.guild.id === "403675414272147457") {
     if(member.guild.roles.find("name", CONFIG.newbieRole)){
-      member.addRole(member.guild.roles.find("name", CONFIG.newbieRole));
+      member.addRole(member.guild.roles.find("name", CONFIG.newbieRole))
+          .then();
     }
     else {
       console.log("role not found! I'll create it!");
@@ -91,7 +90,7 @@ bot.on('guildMemberAdd', member => {
         permissions: [],
         hoist: true
       }).then(function(role) {
-        member.addRole(role);
+        member.addRole(role).then();
       });
     }
   }
