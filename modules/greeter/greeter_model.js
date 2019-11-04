@@ -9,7 +9,7 @@ const greeterSchema = mongoose.Schema({
   greetText: {type: String, default: "Hey {user}, welcome to **{server}**!"},
   greetPrivate: {type: Boolean, default: false},
   privateMessage: {type: String, default: "Hey {user}, welcome to **{server}**!"},
-  setNewbieRole: {type: Boolean, default: false},
+  assignNewbieRole: {type: Boolean, default: false},
   newbieRoles: [String],
   sendLeaveMessage: {type: Boolean, default: false},
   leaveChannel: String,

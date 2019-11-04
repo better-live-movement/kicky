@@ -77,7 +77,7 @@ bot.on('guildMemberAdd', member => {
   });
 
 
-  if(CONFIG.setNewbieRole || member.guild.id === "403675414272147457") {
+  if(CONFIG.assignNewbieRole || member.guild.id === "403675414272147457") {
     if(member.guild.roles.find("name", CONFIG.newbieRole)){
       member.addRole(member.guild.roles.find("name", CONFIG.newbieRole))
           .then();

@@ -1,7 +1,8 @@
-const Informer = require('../modules/Informer');
+const Informer = require('../modules/old_Informer');
 const Fun = require('../modules/Fun');
 const Anno = require('../modules/anno');
 const Roler = require('../modules/Roler');
+const Greeter = require('../modules/greeter/greeterCommands');
 
 const YTDL = require('ytdl-core');
 
@@ -58,6 +59,9 @@ exports.exec_comand = (msg, bot, config) => {
     case 'info':
         informer.respond();
       break;
+    case 'greeter':
+      Greeter.execCommand(msg, bot, config);
+      break;
     case 'anno':
       let announcer = new Anno(msg);
       announcer.announce();
@@ -98,4 +102,4 @@ exports.exec_comand = (msg, bot, config) => {
       break;
   }
 
-}
+};

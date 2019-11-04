@@ -132,7 +132,7 @@ method.set = function(key, value, msg, cb){
       msg.channel.send(`I'll set the prefix soon (tm) to ${value}`);
       break;
     case 'role-assign':
-      //set setNewbieRole
+      //set assignNewbieRole
       msg.channel.send(`I'll set role-assign soon (tm) to ${value}`);
     default:
       msg.channel.send('Set what?!?');

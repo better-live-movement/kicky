@@ -53,6 +53,18 @@ method.get_config = function (guildId, cb) {
   });
 };
 
+method.patchConfig = function (guildId, data) {
+
+    const updateOps = {};
+    for (const ops of data){
+        updateOps[ops.propName] = ops.value;
+    }
+    Greeter.update({guild_id: guildId}, {$set: updateOps})
+    .exec()
+    .then()
+    .catch();
+};
+
 method.welcome = function(member) {
   console.log("this._config.moduleActive", this._config.moduleActive);
 
@@ -65,7 +77,7 @@ method.welcome = function(member) {
   if(this._config.greetPrivate){
     //do it
   }
-  if (this._config.setNewbieRole) {
+  if (this._config.assignNewbieRole) {
     method.assignRole(member);
   }
 };
@@ -118,7 +130,7 @@ method.goodbye = function(member) {
   if (this._config.sendLeaveMessage) {
     method.sendLeaveMessage(member);
   }
-  if (this._config.setNewbieRole) {
+  if (this._config.assignNewbieRole) {
     method.revokeRole(member);
   }
 };
@@ -130,6 +142,22 @@ method.sendLeaveMessage = function (member) {
 
 method.revokeRole = function (member) {
   //do it
+};
+
+method.getPropNames = function() {
+  return [
+    'moduleActive',
+    'greetNewbies',
+    'greetChannel',
+    'greetText',
+    'greetPrivate',
+    'privateMessage',
+    'assignNewbieRole',
+    'newbieRoles',
+    'sendLeaveMessage',
+    'leaveChannel',
+    'leaveMessage'
+  ];
 };
 
 module.exports = GreeterController;

@@ -1,6 +1,6 @@
 {
   "greetNewbies": true,
-  "setNewbieRole": false,
+  "assignNewbieRole": false,
   "newbieRole": "interested",
   "prefix": "b!"
 }
