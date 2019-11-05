@@ -14,7 +14,7 @@ const DASHBOARD = 'https://better-live-movement.github.io/kicky/';
 const AVATAR = 'https://cdn.discordapp.com/avatars/405516819672203274/57c31366b8622443bc0b776ffdaf779c.png?size=2048';
 
 //I know it's still a dirty hack but it works and I like it! So go fuck your self!! ;-)
-const BACKTICK ='`'
+const BACKTICK ='`';
 
 //old help
 //let help = 'These are the commands Kicky knows\n**k!hello** greets you with your name\n**k!ping** try it\n**k!8ball** ask a question that can be answered with yes or no\n**k!help** shows this help\n**k!info** shows general infos about Kicky\n**k!play <youtubelink>**kicky plays the song (you have to be in a voice channel)\n\nFor support visit https://discord.gg/6VpxTbY';
@@ -72,10 +72,10 @@ let funHelp = new Discord.RichEmbed()
   .setFooter(`for support visit the discord server(${SUPPORT}).`)
 
 
-var method = Informer.prototype;
+var method = Old_Informer.prototype;
 
-function Informer(message, avatar, config) {
-    this._guildId = message.guild.id
+function Old_Informer(message, avatar, config) {
+    this._guildId = message.guild.id;
     this._message = message;
     this._avatar = avatar;
     this._config = config;
@@ -120,4 +120,4 @@ method.respond = function() {
   }
 };
 
-module.exports = Informer;
+module.exports = Old_Informer;
