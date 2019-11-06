@@ -7,10 +7,6 @@ const method = GreeterController.prototype;
 
 function GreeterController() {
   this._config = {};
-  // this._help = {
-  //   "set foo": "sets foo",
-  //   "set": "sets bar"
-  // };
 }
 
 method.add_greeter = function (guild_id) {

@@ -1,0 +1,38 @@
+{
+  "description": "You can greet new users and assign them roles.",
+  "commands": [
+    {
+      "set moduleActive <true|false>": "Activates or deactivates the greeter-module."
+    },
+    {
+      "set greetNewbies <true|false>": "Activates or deactivates greeting of the new member in your server."
+    },
+    {
+      "set greetChannel <channel-name>": "The channels where the new members should be greeted"
+    },
+    {
+      "set greetText <text>": "The greet message. use {server} to insert the server-name, {user} to tag the new user and #<channel-name> to link a channel."
+    },
+    {
+      "set greetPrivate <true|false>": "Activates or deactivates private greetings."
+    },
+    {
+      "set privateMessage <text>": "The greet message. use {server} to insert the server-name and {user} to tag the new user."
+    },
+    {
+      "set assignNewbieRole <true|false>": "Activates or deactivates"
+    },
+    {
+      "set newbieRoles <role-names> (separated by space)": "Adds the roles to assign."
+    },
+    {
+      "set sendLeaveMessage <true|false>": "Activates or deactivates the leave-message."
+    },
+    {
+      "set leaveChannel <channel-name>": "The channels where the bot should say goodbye."
+    },
+    {
+      "set leaveMessage <text>": "The goodbye text."
+    }
+  ]
+}
