@@ -1,0 +1,15 @@
+{
+  "module": "music",
+  "description": "Kicky can play music in a voice channel.",
+  "commands": [
+    {
+      "play <youtubelink>": "kicky plays the song (you have to be in a voice channel)"
+    },
+    {
+      "skip": "skips the current song"
+    },
+    {
+      "stop": "disconnects the bot from the voice-channel"
+    }
+  ]
+}
