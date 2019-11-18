@@ -1,4 +1,5 @@
 {
+  "module": "greeter",
   "description": "You can greet new users and assign them roles.",
   "commands": [
     {
