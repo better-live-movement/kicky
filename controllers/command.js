@@ -1,7 +1,8 @@
-const Informer = require('../modules/old_Informer');
+const OldInformer = require('../modules/old_Informer');
 const Fun = require('../modules/Fun');
 const Anno = require('../modules/anno');
 const Roler = require('../modules/Roler');
+const InfoController = require('../controllers/info');
 const Greeter = require('../modules/greeter/greeterCommands');
 
 const YTDL = require('ytdl-core');
@@ -42,7 +43,7 @@ exports.exec_comand = (msg, bot, config) => {
   if(msgArray[2]) {
     args =msgArray.slice(2);
   }
-  let informer = new Informer(msg, bot.user.avatarURL, config);
+  let oldInformer = new OldInformer(msg, bot.user.avatarURL, config);
 
 
 
@@ -57,7 +58,8 @@ exports.exec_comand = (msg, bot, config) => {
       break;
     case 'help':
     case 'info':
-        informer.respond();
+        oldInformer.respond();
+        InfoController.respond(msg, bot, config);
       break;
     case 'greeter':
       Greeter.execCommand(msg, bot, config);
@@ -98,7 +100,7 @@ exports.exec_comand = (msg, bot, config) => {
       break;
     default:
       msg.channel.send('***Invalid command!***');
-      msg.channel.send(informer.help());
+      msg.channel.send(oldInformer.help());
       break;
   }
 
