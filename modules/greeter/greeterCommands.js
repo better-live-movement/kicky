@@ -1,3 +1,4 @@
+const Discord = require('discord.js');
 const Greeter = require('./greeterController');
 const greeterController = new Greeter();
 
@@ -24,7 +25,7 @@ function setGreetChannel(channelName) {
 }
 
 function setNewbieRoles(roleNames) {
-  //soon tm
+  //TODO: add or remove
 }
 
 exports.execCommand = (msg, bot, config) => {
@@ -39,8 +40,35 @@ exports.execCommand = (msg, bot, config) => {
     if (propNames.indexOf(msgArray[2]) !== -1){
       setConfigProperty(msgArray[2], args, msg.guild.id);
     }
+  } else if(command === 'get' || command === getconfig) {
+    greeterController.get_config(msg.guild.id, (resp) => {
+      console.log(resp);
+      const greeterConfigEmbed = new Discord.RichEmbed()
+        .setTitle('greeter-config')
+        .setColor(0x1a81cd)
+        .addField('moduleActive', resp.moduleActive ? '✓' : 'x')
+        .addField('greetNewbies', resp.greetNewbies ? '✓' : 'x');
+      let greetChannel = resp.greetChannel ? msg.guild.channels.get(resp.greetChannel) : 'x';
+      greeterConfigEmbed.addField('greetChannel', greetChannel)
+        .addField('greetText', resp.greetText ? resp.greetText : 'x')
+        //.addField('greetPrivate', resp.greetPrivate ? '✓' : 'x')
+        //.addField('privateMessage', resp.privateMessage ? resp.privateMessage : 'x')
+        .addField('assignNewbieRole', resp.assignNewbieRole ? '✓' : 'x');
+      let newbieRoles = '';
+      if(resp.newbieRoles.length > 0){
+        resp.newbieRoles.forEach( newbieRole => {
+          let foundRole = msg.guild.roles.get(newbieRole);
+          newbieRoles += foundRole.name + ' ';
+        });
+      } else {
+        newbieRoles = '-';
+      }
+      greeterConfigEmbed.addField('newbieRoles', resp.newbieRoles ? newbieRoles : 'x')
+        .addField('sendLeaveMessage', resp.sendLeaveMessage ? '✓' : 'x')
+        .addField('leaveMessage', resp.leaveMessage ? resp.leaveMessage : 'x');
+      msg.channel.send(greeterConfigEmbed);
+    });
   } else {
-    //soon tm
-    args = msgArray.slice(2);
+    return false;
   }
 };
