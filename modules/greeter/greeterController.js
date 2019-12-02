@@ -38,14 +38,16 @@ method.get_config = function (guildId, cb) {
   .then(doc => {
     if (doc) {
       this._config = doc;
-      cb();
+      cb(doc);
     } else {
       Log.add(`No config found for this GuildId ${guildId}. Add greeter to db.`, 'Greeter: Load config faild');
+      cb(`No config found for this GuildId ${guildId}. Add greeter to db.`);
       this.add_greeter(guildId);
     }
   })
   .catch(err => {
     Log.add(err, 'Greeter');
+    cb(err);
   });
 };
 
