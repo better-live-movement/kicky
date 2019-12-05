@@ -2,11 +2,11 @@ const Discord = require('discord.js');
 const Greeter = require('./greeterController');
 const greeterController = new Greeter();
 
-function setConfigProperty(propName, args, guildId) {
+function setConfigProperty(propName, args, guildId, msg) {
   let value = args.join(' ');
   switch (propName) {
     case 'greetChannel':
-      setGreetChannel();
+      setGreetChannel(value, guildId, msg);
       break;
     case 'newbieRoles':
       setNewbieRoles();
@@ -20,13 +20,32 @@ function setConfigProperty(propName, args, guildId) {
   }
 }
 
-function setGreetChannel(channelName) {
-  //soon tm
+function setGreetChannel(channelName, guildId, msg) {
+  let GreetChannel = msg.guild.channels.find("name",channelName);
+  let data = [
+    {"propName": 'greetChannel', "value": GreetChannel.id}
+  ];
+  greeterController.patchConfig(guildId, data);
 }
 
 function setNewbieRoles(roleNames) {
   //TODO: add or remove
 }
+
+function removeNewbieRole(roleToRemove, newbieRolesInConfig, msg, guildId){
+  msg.channel.send('removing role...');
+  if(newbieRolesInConfig.indexOf(roleToRemove) === -1){
+    console.log('this role is not in greeter-config');
+  } else {
+    newbieRolesInConfig.splice(newbieRolesInConfig.indexOf(roleToRemove), 1);
+    let data = [
+      {"propName": 'newbieRoles', "value": newbieRolesInConfig}
+    ];
+    greeterController.patchConfig(guildId, data);
+    msg.channel.send('done');
+  }
+}
+
 
 exports.execCommand = (msg, bot, config) => {
   let msgArray = msg.content.substring(config.prefix.length).split(' ');
@@ -38,7 +57,7 @@ exports.execCommand = (msg, bot, config) => {
     args = msgArray.slice(3);
     let propNames = greeterController.getPropNames();
     if (propNames.indexOf(msgArray[2]) !== -1){
-      setConfigProperty(msgArray[2], args, msg.guild.id);
+      setConfigProperty(msgArray[2], args, msg.guild.id, msg);
     }
   } else if(command === 'get' || command === getconfig) {
     greeterController.get_config(msg.guild.id, (resp) => {
