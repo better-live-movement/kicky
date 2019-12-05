@@ -24,7 +24,7 @@
       "set assignNewbieRole <true|false>": "Activates or deactivates"
     },
     {
-      "set newbieRoles <role-names> (separated by space)": "Adds the roles to assign."
+      "set newbieRoles <add|remove> <@role-name>": "Sets the roles to assign."
     },
     {
       "set sendLeaveMessage <true|false>": "Activates or deactivates the leave-message."
