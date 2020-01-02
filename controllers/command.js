@@ -1,4 +1,3 @@
-const OldInformer = require('../modules/old_Informer');
 const Fun = require('../modules/Fun');
 const Anno = require('../modules/anno');
 const Roler = require('../modules/Roler');
@@ -43,7 +42,6 @@ exports.exec_comand = (msg, bot, config) => {
   if(msgArray[2]) {
     args =msgArray.slice(2);
   }
-  let oldInformer = new OldInformer(msg, bot.user.avatarURL, config);
 
 
 
@@ -58,7 +56,6 @@ exports.exec_comand = (msg, bot, config) => {
       break;
     case 'help':
     case 'info':
-        oldInformer.respond();
         InfoController.respond(msg, bot, config);
       break;
     case 'greeter':
