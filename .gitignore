@@ -79,3 +79,6 @@ node_modules.js/*
 nodemon.json
 
 /.idea
+.idea/kicky.iml
+.idea/modules.xml
+.idea/vcs.xml
