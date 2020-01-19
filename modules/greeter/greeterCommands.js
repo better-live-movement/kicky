@@ -9,7 +9,7 @@ function setConfigProperty(propName, args, guildId, msg) {
       setGreetChannel(value, guildId, msg);
       break;
     case 'newbieRoles':
-      setNewbieRoles();
+      setNewbieRoles(args.slice(1), args.slice(0,1), msg, guildId);
       break;
     default:
       let data = [
@@ -28,8 +28,37 @@ function setGreetChannel(channelName, guildId, msg) {
   greeterController.patchConfig(guildId, data);
 }
 
-function setNewbieRoles(roleNames) {
-  //TODO: add or remove
+function setNewbieRoles(roleName, action, msg, guildId) {
+  console.log('roleName: ', roleName, ', action: ', action);
+  
+  // if(!msg.guild.roles.find("name", roleName)){
+  //   msg.channel.send(`there is noe role ${roleName}`);
+  // } else{
+    let role = findRole(roleName);
+    let roleId = roleName.id;
+    //let roleId = msg.guild.roles.find("name", roleName).id.toString();
+    greeterController.get_config(msg.guild.id, (resp) => {
+      if(action === 'add'){
+        addNewbieRole(roleId, resp.newbieRoles, msg, guildId);
+      } else if(action === 'remove') {
+        removeNewbieRole(roleId, resp.newbieRoles, msg, guildId);
+      } else {
+        msg.channel.send(`nope`);
+      }
+    });
+ // }
+}
+
+function addNewbieRole(newRoleId, newbieRolesInConfig, msg, guildId){
+  if(newbieRolesInConfig.indexOf(newRoleId)){
+    msg.channel.send(`nope`);
+  } else {
+    newbieRolesInConfig.push(newRoleId);
+    let data = [
+      {"propName": 'newbieRoles', "value": newbieRolesInConfig}
+    ];
+    greeterController.patchConfig(guildId, data);
+  }
 }
 
 function removeNewbieRole(roleToRemove, newbieRolesInConfig, msg, guildId){
@@ -46,6 +75,16 @@ function removeNewbieRole(roleToRemove, newbieRolesInConfig, msg, guildId){
   }
 }
 
+function findRole(roleName){
+  console.log('roleName: ', roleName);
+  let role = "";
+  if(roleName.startsWith("@")){
+    //jupp
+  } else {
+    role = msg.guild.roles.find("name", roleName);
+  }
+  return role;
+}
 
 exports.execCommand = (msg, bot, config) => {
   let msgArray = msg.content.substring(config.prefix.length).split(' ');
@@ -68,6 +107,7 @@ exports.execCommand = (msg, bot, config) => {
         .addField('moduleActive', resp.moduleActive ? '✓' : 'x')
         .addField('greetNewbies', resp.greetNewbies ? '✓' : 'x');
       let greetChannel = resp.greetChannel ? msg.guild.channels.get(resp.greetChannel) : 'x';
+      //console.log('greetChannel: ', greetChannel);
       greeterConfigEmbed.addField('greetChannel', greetChannel)
         .addField('greetText', resp.greetText ? resp.greetText : 'x')
         //.addField('greetPrivate', resp.greetPrivate ? '✓' : 'x')
